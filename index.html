@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="./js/index.js"></script>
     <title>ChordMemo</title>
 </head>
 <body>
@@ -19,15 +20,25 @@
         </section>
         <section class="download-buttons">
             <h2>Get ChordMemo</h2>
-            <a class="play-store-button download-button" target="_blank">Download on Play Store</a>
-            <a class="app-store-button download-button" target="_blank">Download on App Store</a>
-            <a 
-                href="https://expo.dev/accounts/joshsj89/projects/ChordMemo/builds/441a626b-af7c-4f63-bba2-66e5c67e0056" 
-                class="apk-button download-button"
-                target="_blank"
-            >
-                Download APK
-            </a>
+            <button id="play-store-button" class="download-button" target="_blank">Download on Play Store</button>
+            <button id="app-store-button" class="download-button" target="_blank">Download on App Store</button>
+            <span class="dropdown">
+                <button 
+                    id="apk-button" 
+                    class="download-button"
+                    download-id="64f3edf1d11932398c0807ee"
+                >
+                    Download APK
+                </button>
+                <div class="dropdown-content" id="version-dropdown">
+                    <button class="dropdown-item">1.0.0</button>
+                    <button class="dropdown-item">1.0.1</button>
+                    <button class="dropdown-item">1.0.2</button>
+                    <button class="dropdown-item">1.0.3</button>
+                    <button class="dropdown-item">1.0.4</button>
+                    <button class="dropdown-item">1.0.5</button>
+                </div>
+            </span>
         </section>
         <section class="privacy-policy">
             <a href="privacy-policy.html">Privacy Policy</a>
