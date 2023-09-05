@@ -41,7 +41,7 @@ const handleClick = async (e) => {
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
-        link.download = data.fileName;
+        link.download = `${data.fileName}.apk`;
         link.click();
     } catch (error) {
         console.error('Error Downloading App: ', error);
