@@ -8,6 +8,16 @@ window.addEventListener('load', async () => {
         apkButton.addEventListener('click', handleClick);
     });
 
+    const playStoreButton = document.getElementById('play-store-button');
+    playStoreButton.addEventListener('click', () => {
+        window.open('https://play.google.com/store/apps/details?id=com.joshsj89.ChordMemo', '_blank');
+    })
+
+    const appStoreButton = document.getElementById('app-store-button');
+    appStoreButton.addEventListener('click', () => {
+        window.open('exp://u.expo.dev/update/7ca97fc1-42d7-4681-aaf7-82ded6c6c167', '_blank');
+    })
+
     const apkButton = document.getElementById('apk-button');
     const dropdown = document.getElementById('version-dropdown');
     apkButton.addEventListener('click', () => dropdown.classList.toggle('show'));
