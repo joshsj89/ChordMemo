@@ -1,5 +1,8 @@
 window.addEventListener('load', async () => {
     await getApks();
+    // await getiOSPreviews();
+
+    const previewID = await getiOSPreview();
 
     const apkButtons = document.querySelectorAll('.dropdown-item');
     
@@ -15,7 +18,7 @@ window.addEventListener('load', async () => {
 
     const appStoreButton = document.getElementById('app-store-button');
     appStoreButton.addEventListener('click', () => {
-        window.open('exp://u.expo.dev/update/7ca97fc1-42d7-4681-aaf7-82ded6c6c167', '_blank');
+        window.open(`exp://u.expo.dev/update/${previewID}`, '_blank');
     })
 
     const apkButton = document.getElementById('apk-button');
@@ -84,6 +87,63 @@ const getApks = async () => {
             button.textContent = apk.version;
             dropdown.appendChild(button);
         });
+    } catch (error) {
+        console.error('Error Fetching Apps: ', error);
+    }
+}
+
+/*
+const getiOSPreviews = async () => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const response = await fetch('https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        const previews = data.preview;
+
+        previews.forEach((preview) => {
+            const dropdown = document.getElementById('version-dropdown');
+            const button = document.createElement('button');
+            button.setAttribute('class', 'dropdown-item');
+            button.setAttribute('download-id', preview._id);
+            button.textContent = preview.version;
+            dropdown.appendChild(button);
+        });
+    } catch (error) {
+        console.error('Error Fetching Apps: ', error);
+    }
+}
+*/
+
+const getiOSPreview = async () => {
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }
+
+    try {
+        const response = await fetch('https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        const preview = data.preview[0];
+
+        return preview.previewID;
     } catch (error) {
         console.error('Error Fetching Apps: ', error);
     }
