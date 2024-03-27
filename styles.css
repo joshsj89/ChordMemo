@@ -94,6 +94,35 @@ main {
     display: block;
 }
 
+.progress-bar-wrapper {
+    display: none;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    margin-top: 20px;
+    overflow: hidden;
+    height: 20px;
+}
+
+.progress-bar {
+    background-color: whitesmoke;
+    height: 20px;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+}
+
+.progress-bar-fill {
+    background-color: #009788;
+    height: 100%;
+    width: 0%;
+    text-align: center;
+    line-height: 20px;
+    display: block;
+    transition: width 0.3s ease;
+    color: white;
+}
+
 .privacy-policy {
     text-align: center;
     margin-top: 20px;

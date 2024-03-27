@@ -50,12 +50,50 @@ const handleClick = async (e) => {
 
         const data = await responseInfo.json();
 
-        const blob = await response.blob();
+        const contentLength = +response.headers.get('content-length');
+        let loaded = 0;
+
+        const progressBar = document.querySelector('.progress-bar-wrapper');
+        const fill = document.querySelector('.progress-bar-fill');
+
+        progressBar.style.display = 'block';
+
+        const stream = new ReadableStream({
+            start(controller) {
+                const reader = response.body.getReader();
+
+                const read = () => {
+                    reader.read().then(({ done, value }) => {
+                        if (done) {
+                            controller.close();
+                            return;
+                        }
+
+                        loaded += value.byteLength;
+                        const percentageComplete = Math.round((loaded / contentLength) * 100) + '%';
+                        fill.style.width = percentageComplete;
+                        fill.textContent = percentageComplete;
+
+                        controller.enqueue(value);
+                        read();
+                    });
+                };
+
+                read();
+            }
+        });
+
+        const newResponse = new Response(stream);
+        const blob = await newResponse.blob();
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.download = `${data.fileName}.apk`;
         link.click();
+
+        progressBar.style.display = 'none';
+        fill.style.width = '0%';
+        fill.textContent = '0%';
     } catch (error) {
         console.error('Error Downloading App: ', error);
     }
