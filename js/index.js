@@ -50,7 +50,7 @@ const handleClick = async (e) => {
 
         const data = await responseInfo.json();
 
-        const contentLength = +response.headers.get('content-length');
+        const contentLength = +response.headers.get('Content-Length');
         let loaded = 0;
 
         const progressBar = document.querySelector('.progress-bar-wrapper');
@@ -60,7 +60,7 @@ const handleClick = async (e) => {
 
         const stream = new ReadableStream({ // create a new ReadableStream
             start(controller) { // start method that is called when the stream is started
-                const reader = response.body.getReader(); // get ReedableStream from response body
+                const reader = response.body?.getReader(); // get ReedableStream from response body
 
                 const read = async () => { // read method that is called recursively
                     const { done, value } = await reader.read(); // read the next chunk of data
