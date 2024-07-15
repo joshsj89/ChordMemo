@@ -58,25 +58,26 @@ const handleClick = async (e) => {
 
         progressBar.style.display = 'block';
 
-        const stream = new ReadableStream({
-            start(controller) {
-                const reader = response.body.getReader();
+        const stream = new ReadableStream({ // create a new ReadableStream
+            start(controller) { // start method that is called when the stream is started
+                const reader = response.body.getReader(); // get ReedableStream from response body
 
-                const read = () => {
-                    reader.read().then(({ done, value }) => {
-                        if (done) {
-                            controller.close();
-                            return;
-                        }
+                const read = async () => { // read method that is called recursively
+                    const { done, value } = await reader.read(); // read the next chunk of data
 
-                        loaded += value.byteLength;
-                        const percentageComplete = Math.round((loaded / contentLength) * 100) + '%';
-                        fill.style.width = percentageComplete;
-                        fill.textContent = percentageComplete;
+                    if (done) { // if there is no more data (value is undefined as well)
+                        controller.close(); // close the stream
+                        return;
+                    }
 
-                        controller.enqueue(value);
-                        read();
-                    });
+                    loaded += value.byteLength; // increase the loaded counter by the length of the chunk
+                    const percentageComplete = Math.round((loaded / contentLength) * 100) + '%'; // calculate the percentage of the download
+                    fill.style.width = percentageComplete;
+                    fill.textContent = percentageComplete;
+
+                    controller.enqueue(value); // enqueue the chunk of data
+
+                    read(); // call read recursively
                 };
 
                 read();
