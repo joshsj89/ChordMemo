@@ -41,8 +41,8 @@ const handleClick = async (e) => {
     }
 
     try {
-        const responseInfo = await fetch(`https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/${downloadID}/${downloadID2}`, options);
-        const response = await fetch(`https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/download/${downloadID}/${downloadID2}`, options);
+        const responseInfo = await fetch(`https://joshsapi.com/apps/${downloadID}/${downloadID2}`, options);
+        const response = await fetch(`https://joshsapi.com/apps/download/${downloadID}/${downloadID2}`, options);
 
         if (!response.ok || !responseInfo.ok) {
             throw new Error('Network response was not ok');
@@ -109,7 +109,7 @@ const getApks = async () => {
     }
 
     try {
-        const response = await fetch('https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/versions/descending/64f3edf1d11932398c0807ee', options);
+        const response = await fetch('https://joshsapi.com/apps/versions/descending/64f3edf1d11932398c0807ee', options);
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -141,7 +141,7 @@ const getiOSPreviews = async () => {
     }
 
     try {
-        const response = await fetch('https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
+        const response = await fetch('https://joshsapi.com/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -173,7 +173,7 @@ const getiOSPreview = async () => {
     }
 
     try {
-        const response = await fetch('https://joshsj89-1d7a9e7057c7.herokuapp.com/api/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
+        const response = await fetch('https://joshsapi.com/apps/versions/ios/descending/6502bd7d22d33d5d9e7bd2e1', options);
 
         if (!response.ok) {
             throw new Error('Network response was not ok');
